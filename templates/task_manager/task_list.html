@@ -21,7 +21,9 @@
     <ul>
       {% for task in task_list %}
         <li>
-          <h3>Task title: {{ task.name }}</h3>
+          <h3>
+            <a href="{% url "task_manager:task-detail" pk=task.id %} ">{{ task.name }}</a>
+          </h3>
           <p>Description: {{ task.description }}</p>
           <h4>Deadline: {{ task.deadline }}</h4>
         </li>
