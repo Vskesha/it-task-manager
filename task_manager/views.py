@@ -1,14 +1,17 @@
-from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import generic
 
 from task_manager.models import Task
 
 
-# Create your views here.
-
-
 class TaskListView(generic.ListView):
     model = Task
-    queryset = Task.objects.all().select_related("task_type").prefetch_related("assignees")
-    template_name = "task_manager/index.html"
+    queryset = Task.objects.all().select_related("task_type").prefetch_related("assignees__tasks")
+    template_name = "task_manager/task_list.html"
     context_object_name = "task_list"
+
+
+class TaskCreateView(generic.CreateView):
+    model = Task
+    fields = "__all__"
+    success_url = reverse_lazy("task_manager:task-list")
