@@ -2,7 +2,11 @@
 
 {% block content %}
   <div class="container-1">
-    <h1>Home</h1>
+    <h1>Task list
+      <a href="{% url 'task_manager:task-create' %}" class="btn btn-primary link-to-page">
+        Create
+      </a>
+    </h1>
     {% if user.is_authenticated %}
       <p>Hello <strong>{{ user.username }}</strong>!</p>
       <form action="{% url 'logout' %}" method="post">
