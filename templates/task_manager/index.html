@@ -95,7 +95,9 @@
               </div>
               <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
                 <div class="bg-gradient-info border-radius-lg h-100">
+                  {#                    <img src="{% static 'img/shapes/waves-white.svg' %}" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">#}
                   <div class="position-relative d-flex align-items-center justify-content-center h-100">
+                    {#                      <img class="w-100 position-relative z-index-2 pt-4" src="{% static 'img/illustrations/rocket-white.png' %}" alt="rocket">#}
                   </div>
                 </div>
               </div>
@@ -124,6 +126,39 @@
         </div>
       </div>
     </div>
+
+    {#      <div class="row mt-4">#}
+    {#        <div class="col-lg-5 mb-lg-0 mb-4">#}
+    {#          <div class="card z-index-2">#}
+    {#            <div class="card-body p-3">#}
+    {#              <div class="bg-gradient-dark border-radius-lg py-3 pe-1 mb-3">#}
+    {#                <div class="chart">#}
+    {#                  <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>#}
+    {#                </div>#}
+    {#              </div>#}
+    {#              <h6 class="ms-2 mt-4 mb-0"> Active Users </h6>#}
+    {#              <p class="text-sm ms-2"> (<span class="font-weight-bolder">+23%</span>) than last week </p>#}
+    {#            </div>#}
+    {#          </div>#}
+    {#        </div>#}
+    {#        <div class="col-lg-7">#}
+    {#          <div class="card z-index-2">#}
+    {#            <div class="card-header pb-0">#}
+    {#              <h6>Sales overview</h6>#}
+    {#              <p class="text-sm">#}
+    {#                <i class="fa fa-arrow-up text-success"></i>#}
+    {#                <span class="font-weight-bold">4% more</span> in 2021#}
+    {#              </p>#}
+    {#            </div>#}
+    {#            <div class="card-body p-3">#}
+    {#              <div class="chart">#}
+    {#                <canvas id="chart-line" class="chart-canvas" height="300"></canvas>#}
+    {#              </div>#}
+    {#            </div>#}
+    {#          </div>#}
+    {#        </div>#}
+    {#      </div>#}
+
     <div class="row my-4">
       <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
         <div class="card">
@@ -206,18 +241,11 @@
                         <td class="align-middle text-center text-sm">
                           <span class="text-xs font-weight-bold"> {{ task.deadline }} </span>
                         </td>
-                        <td class="align-middle">
-                          <div class="progress-wrapper w-75 mx-auto">
-                            <div class="progress-info">
-                              <div class="progress-percentage">
-                                <span class="text-xs font-weight-bold">{% now "Y-m-d H:i:s" %}</span>
-                              </div>
-                            </div>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="10"
-                                   aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </div>
+                        <td class="align-middle" style="text-align: center;">
+                          <form method="post" action="{% url 'task_manager:task-completed' pk=task.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success link-to-page">Ready</button>
+                          </form>
                         </td>
                       </tr>
                     {% endif %}
@@ -243,8 +271,10 @@
             {% if tasks_for_user_completed %}
               {% for task in tasks_for_user_completed %}
                 <div class="d-flex justify-content-between align-items-center">
-                  <p>{{ task.name }}</p>
-                  <p>Done</p>
+                  <a href="{% url "task_manager:task-detail" pk=task.id %}">
+                    <p>{{ task.name }}</p>
+                  </a>
+                  <span class="badge badge-sm bg-gradient-success">Done</span>
                 </div>
               {% endfor %}
             {% else %}

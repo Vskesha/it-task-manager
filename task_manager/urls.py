@@ -3,6 +3,7 @@ from django.urls import path
 from task_manager.views import (
     index,
     password_change,
+    TaskCompletedView,
     TaskCreateView,
     TaskDeleteView,
     TaskDetailView,
@@ -44,7 +45,12 @@ urlpatterns = [
         TaskDeleteView.as_view(),
         name="task-delete"
     ),
-path(
+    path(
+        "task/<int:pk>/task_completed/",
+        TaskCompletedView.as_view(),
+        name="task-completed"
+    ),
+    path(
         "worker/create/",
         WorkerCreateView.as_view(),
         name="worker-create"
