@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from task_manager.forms import TaskSearchForm
+from task_manager.forms import TaskSearchForm, TaskCreateForm
 from task_manager.models import Task
 
 
@@ -14,7 +14,7 @@ def index(request) -> HttpResponse:
     all_task = Task.objects.all()
 
     num_not_completed_task = all_task.filter(is_completed=False).count()
-    last_task = all_task.last()
+    last_task = all_task.first()
     context = {
         "num_not_completed_task": num_not_completed_task,
         "last_task": last_task,
@@ -28,6 +28,7 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = "task_manager/task_list.html"
     context_object_name = "task_list"
+    paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(TaskListView, self).get_context_data(**kwargs)
@@ -52,7 +53,7 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
-    fields = "__all__"
+    form_class = TaskCreateForm
     success_url = reverse_lazy("task_manager:task-list")
 
 

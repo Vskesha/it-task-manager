@@ -37,4 +37,7 @@
   {% else %}
     <p>There are no tasks</p>
   {% endif %}
+  {% block pagination %}
+    {% include "includes/pagination.html" %}
+  {% endblock %}
 {% endblock %}
