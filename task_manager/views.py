@@ -13,12 +13,15 @@ from task_manager.models import Task
 def index(request) -> HttpResponse:
     all_task = Task.objects.all()
 
-    num_not_completed_task = all_task.filter(is_completed=False).count()
+    not_completed_task = all_task.filter(is_completed=False)
+    num_not_completed_task = not_completed_task.count()
     last_task = all_task.first()
+
     context = {
         "num_not_completed_task": num_not_completed_task,
         "last_task": last_task,
         "all_task": all_task,
+        "not_completed_task": not_completed_task,
     }
 
     return render(request, "task_manager/index.html", context=context)
