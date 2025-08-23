@@ -100,6 +100,22 @@ class TaskCompletedView(LoginRequiredMixin, generic.View):
         return redirect("task_manager:index")
 
 
+class TaskAddOrDelWorkerView(LoginRequiredMixin, generic.View):
+    model = Task
+    fields = ("assignees",)
+
+    def post(self, request, pk):
+        user = request.user
+        task = Task.objects.get(id=pk)
+
+        if user in task.assignees.all():
+            task.assignees.remove(user)
+        else:
+            task.assignees.add(user)
+
+        return redirect("task_manager:task-list")
+
+
 def is_admin(user):
     return user.is_superuser
 
