@@ -1,6 +1,25 @@
 from django import forms
+from django.contrib.auth import get_user_model
+from django.forms import DateTimeInput, NullBooleanSelect, RadioSelect
 
 from task_manager.models import Task
+
+
+class TaskCreateForm(forms.ModelForm):
+    assignees = forms.ModelMultipleChoiceField(
+        queryset=get_user_model().objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+
+    class Meta:
+        model = Task
+        fields = "__all__"
+        widgets = {
+            "deadline": DateTimeInput(attrs={"type": "datetime-local"}),
+            "is_completed": NullBooleanSelect(),
+            "priority": RadioSelect()
+        }
 
 
 class TaskUpdateForm(forms.ModelForm):
