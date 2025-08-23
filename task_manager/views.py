@@ -86,6 +86,20 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("task_manager:task-list")
 
 
+class TaskCompletedView(LoginRequiredMixin, generic.View):
+    model = Task
+    fields = ("is_completed",)
+
+    def post(self, request, pk):
+        task = Task.objects.get(id=pk)
+
+        if task.is_completed is False:
+            task.is_completed = True
+            task.save()
+
+        return redirect("task_manager:index")
+
+
 def is_admin(user):
     return user.is_superuser
 
