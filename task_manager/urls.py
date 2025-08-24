@@ -12,6 +12,7 @@ from task_manager.views import (
     TaskUpdateView,
     WorkerCreateView,
     WorkerDetailView,
+    WorkerListView,
     WorkerUpdateView,
 )
 
@@ -70,6 +71,11 @@ urlpatterns = [
         "worker/<int:pk>/update/",
         WorkerUpdateView.as_view(),
         name="worker-update"
+    ),
+    path(
+        "worker/community/",
+        WorkerListView.as_view(),
+        name="worker-list"
     ),
     path(
         "change-password/",
