@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.views import LogoutView
 from django.db.models import F
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -38,6 +39,10 @@ def index(request) -> HttpResponse:
     }
 
     return render(request, "task_manager/index.html", context=context)
+
+
+class CustomLogoutView(LogoutView):
+    next_page = reverse_lazy("login")
 
 
 class TaskListView(LoginRequiredMixin, generic.ListView):
