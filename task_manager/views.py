@@ -12,6 +12,7 @@ from task_manager.forms import (
     ChangePasswordForm,
     TaskCreateForm,
     TaskSearchForm,
+    TaskUpdateForm,
     WorkerCreateForm,
     WorkerSearchForm,
 )
@@ -86,7 +87,12 @@ class TaskDetailView(generic.DetailView):
 
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
-    fields = ["description", "is_completed"]
+    form_class = TaskUpdateForm
+
+    def get_form_kwargs(self) -> dict:
+        kwargs = super(TaskUpdateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
 
     def get_success_url(self) -> str:
         pk = self.object.pk
