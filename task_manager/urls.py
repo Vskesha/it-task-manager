@@ -11,6 +11,7 @@ from task_manager.views import (
     TaskListView,
     TaskUpdateView,
     WorkerCreateView,
+    WorkerDeleteView,
     WorkerDetailView,
     WorkerListView,
     WorkerUpdateView,
@@ -76,6 +77,11 @@ urlpatterns = [
         "worker/community/",
         WorkerListView.as_view(),
         name="worker-list"
+    ),
+    path(
+        "worker/<int:pk>/delete/",
+        WorkerDeleteView.as_view(),
+        name="worker-delete"
     ),
     path(
         "change-password/",
