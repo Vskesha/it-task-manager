@@ -12,7 +12,7 @@ class TaskCreateForm(forms.ModelForm):
     assignees = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
         widget=forms.CheckboxSelectMultiple,
-        required=False
+        required=False,
     )
 
     class Meta:
@@ -21,7 +21,7 @@ class TaskCreateForm(forms.ModelForm):
         widgets = {
             "deadline": DateTimeInput(attrs={"type": "datetime-local"}),
             "is_completed": NullBooleanSelect(),
-            "priority": RadioSelect()
+            "priority": RadioSelect(),
         }
 
     def clean_deadline(self):
@@ -36,12 +36,18 @@ class TaskUpdateForm(forms.ModelForm):
     assignees = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
         widget=forms.CheckboxSelectMultiple,
-        required=False
+        required=False,
     )
 
     class Meta:
         model = Task
-        fields = ["description", "is_completed", "priority", "deadline", "assignees"]
+        fields = [
+            "description",
+            "is_completed",
+            "priority",
+            "deadline",
+            "assignees",
+        ]
         widgets = {
             "deadline": DateTimeInput(attrs={"type": "datetime-local"}),
             "is_completed": NullBooleanSelect(),
@@ -68,9 +74,9 @@ class TaskSearchForm(forms.Form):
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Search of name task",
-                "style": "width: 400px;"
+                "style": "width: 400px;",
             }
-        )
+        ),
     )
 
 
@@ -92,9 +98,9 @@ class WorkerSearchForm(forms.Form):
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Search of username worker",
-                "style": "width: 400px;"
+                "style": "width: 400px;",
             }
-        )
+        ),
     )
 
 

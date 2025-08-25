@@ -62,14 +62,16 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        queryset = (Task.objects.all().select_related("task_type")
-                    .prefetch_related("assignees").order_by(F("is_completed"), F("deadline")))
+        queryset = (
+            Task.objects.all()
+            .select_related("task_type")
+            .prefetch_related("assignees")
+            .order_by(F("is_completed"), F("deadline"))
+        )
         form = TaskSearchForm(self.request.GET)
 
         if form.is_valid():
-            return queryset.filter(
-                name__icontains=form.cleaned_data["name"]
-            )
+            return queryset.filter(name__icontains=form.cleaned_data["name"])
 
         return queryset
 
@@ -82,7 +84,11 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
 
 class TaskDetailView(generic.DetailView):
     model = Task
-    queryset = Task.objects.all().select_related("task_type").prefetch_related("assignees")
+    queryset = (
+        Task.objects.all()
+        .select_related("task_type")
+        .prefetch_related("assignees")
+    )
 
 
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
@@ -91,7 +97,7 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     def get_form_kwargs(self) -> dict:
         kwargs = super(TaskUpdateView, self).get_form_kwargs()
-        kwargs['request'] = self.request
+        kwargs["request"] = self.request
         return kwargs
 
     def get_success_url(self) -> str:
@@ -138,7 +144,11 @@ def is_admin(user):
     return user.is_superuser
 
 
-class WorkerCreateView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView):
+class WorkerCreateView(
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    generic.CreateView
+):
     model = Worker
     form_class = WorkerCreateForm
 
@@ -146,7 +156,11 @@ class WorkerCreateView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateVi
         return is_admin(self.request.user)
 
 
-class WorkerDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+class WorkerDeleteView(
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    generic.DeleteView
+):
     model = Worker
     success_url = reverse_lazy("task_manager:worker-list")
 
@@ -164,7 +178,9 @@ class WorkerUpdateView(LoginRequiredMixin, generic.UpdateView):
     fields = ["username", "first_name", "last_name", "email"]
 
     def get_success_url(self) -> str:
-        return reverse_lazy("task_manager:worker-detail", kwargs={"pk": self.object.pk})
+        return reverse_lazy(
+            "task_manager:worker-detail", kwargs={"pk": self.object.pk}
+        )
 
 
 class WorkerListView(LoginRequiredMixin, generic.ListView):
@@ -177,7 +193,9 @@ class WorkerListView(LoginRequiredMixin, generic.ListView):
 
         username = self.request.GET.get("username", "")
 
-        context["search_form"] = WorkerSearchForm(initial={"username": username})
+        context["search_form"] = WorkerSearchForm(
+            initial={"username": username}
+        )
 
         return context
 
@@ -206,4 +224,4 @@ def password_change(request) -> HttpResponse:
             for error in list(form.errors.values()):
                 messages.error(request, error)
     form = ChangePasswordForm(user)
-    return render(request, 'task_manager/change_password.html', {'form': form})
+    return render(request, "task_manager/change_password.html", {"form": form})
