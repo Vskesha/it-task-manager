@@ -87,7 +87,10 @@ class TaskDetailView(generic.DetailView):
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
     fields = ["description", "is_completed"]
-    success_url = reverse_lazy("task_manager:task-list")
+
+    def get_success_url(self) -> str:
+        pk = self.object.pk
+        return reverse_lazy("task_manager:task-detail", kwargs={"pk": pk})
 
 
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -139,7 +142,7 @@ class WorkerCreateView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateVi
 
 class WorkerDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     model = Worker
-    success_url = reverse_lazy("cabinet:worker-list")
+    success_url = reverse_lazy("task_manager:worker-list")
 
     def test_func(self):
         return is_admin(self.request.user)
