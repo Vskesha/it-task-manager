@@ -27,9 +27,16 @@
               </h5>
               <p class="text-sm mb-0 text-capitalize font-weight-bold">{{ task.task_type }}</p>
             </div>
-            <a href="{% url 'task_manager:task-update' pk=task.id %}" class="btn btn-secondary link-to-page">
-              Update
-            </a>
+            <div>
+              {% if user.is_superuser %}
+                <a href="{% url 'task_manager:task-delete' pk=task.id %}" class="btn btn-danger link-to-page">
+                  Delete
+                </a>
+              {% endif %}
+              <a href="{% url 'task_manager:task-update' pk=task.id %}" class="btn btn-secondary link-to-page">
+                Update
+              </a>
+            </div>
           </div>
         </div>
       </div>

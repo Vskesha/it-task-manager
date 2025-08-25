@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import F
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.views import generic
 
 from task_manager.forms import (
@@ -12,6 +12,7 @@ from task_manager.forms import (
     TaskCreateForm,
     TaskSearchForm,
     WorkerCreateForm,
+    WorkerSearchForm,
 )
 from task_manager.models import Task, Worker
 
@@ -142,6 +143,32 @@ class WorkerUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     def get_success_url(self) -> str:
         return reverse_lazy("task_manager:worker-detail", kwargs={"pk": self.object.pk})
+
+
+class WorkerListView(LoginRequiredMixin, generic.ListView):
+    model = Worker
+    template_name = "task_manager/worker_list.html"
+    paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(WorkerListView, self).get_context_data(**kwargs)
+
+        username = self.request.GET.get("username", "")
+
+        context["search_form"] = WorkerSearchForm(initial={"username": username})
+
+        return context
+
+    def get_queryset(self):
+        queryset = Worker.objects.all()
+        form = WorkerSearchForm(self.request.GET)
+
+        if form.is_valid():
+            return queryset.filter(
+                username__icontains=form.cleaned_data["username"]
+            )
+
+        return queryset
 
 
 @login_required
