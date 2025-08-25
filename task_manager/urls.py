@@ -1,6 +1,7 @@
 from django.urls import path
 
 from task_manager.views import (
+    CustomLogoutView,
     index,
     password_change,
     TaskAddOrDelWorkerView,
@@ -87,6 +88,11 @@ urlpatterns = [
         "change-password/",
         password_change,
         name="change-password"
+    ),
+    path(
+        "accounts/logout/",
+        CustomLogoutView.as_view(),
+        name="logout"
     ),
 ]
 
