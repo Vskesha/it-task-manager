@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,11 +28,6 @@ SECRET_KEY = os.environ.get(
     "DJANGO_SECRET_KEY",
     "django-insecure-(9g)c^#-!#i*x-57@vh6t=*&esi)r$tyx0748aedhj9&4pnbln"
 )
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
-
-ALLOWED_HOSTS = ["127.0.0.1"]
 
 INTERNAL_IPS = [
     "127.0.0.1",
@@ -81,17 +76,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
-
-
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
 
 
 # Password validation
