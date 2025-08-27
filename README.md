@@ -5,6 +5,13 @@ Django project for project management
 ## Check it out 
 Deployed at [it-task-manager-bttq.onrender.com/](https://it-task-manager-bttq.onrender.com/)
 
+
+You can test:
+```
+login: test_user
+password: Pass123456
+```
+
 ## Installation
 
 Python3 must be already installed

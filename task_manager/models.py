@@ -31,7 +31,7 @@ class Worker(AbstractUser):
         )
 
     def get_absolute_url(self) -> str:
-        return reverse("cabinet:worker-detail", kwargs={"pk": self.pk})
+        return reverse("task_manager:worker-detail", kwargs={"pk": self.pk})
 
 
 class TaskType(models.Model):

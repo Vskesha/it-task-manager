@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get(
     "DJANGO_SECRET_KEY",
-    "django-insecure-(9g)c^#-!#i*x-57@vh6t=*&esi)r$tyx0748aedhj9&4pnbln"
+    "django-insecure-key"
 )
 
 INTERNAL_IPS = [

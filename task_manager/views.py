@@ -25,7 +25,7 @@ def index(request) -> HttpResponse:
 
     not_completed_task = all_task.filter(is_completed=False)
     num_not_completed_task = not_completed_task.count()
-    last_task = all_task.first()
+    last_task = not_completed_task.first()
 
     tasks_for_user = all_task.filter(assignees=request.user.id)
     tasks_for_user_completed = tasks_for_user.filter(is_completed=True)
