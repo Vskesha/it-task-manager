@@ -2,8 +2,8 @@
 
 Django project for project management
 
-## Check it out
-[Task Manager deployed on Render](LINK_HERE)
+## Check it out 
+Deployed at [it-task-manager-bttq.onrender.com/](https://it-task-manager-bttq.onrender.com/)
 
 ## Installation
 
