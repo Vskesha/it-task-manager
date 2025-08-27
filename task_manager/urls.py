@@ -1,0 +1,99 @@
+from django.urls import path
+
+from task_manager.views import (
+    CustomLogoutView,
+    index,
+    password_change,
+    TaskAddOrDelWorkerView,
+    TaskCompletedView,
+    TaskCreateView,
+    TaskDeleteView,
+    TaskDetailView,
+    TaskListView,
+    TaskUpdateView,
+    WorkerCreateView,
+    WorkerDeleteView,
+    WorkerDetailView,
+    WorkerListView,
+    WorkerUpdateView,
+)
+
+urlpatterns = [
+    path(
+        "",
+        index,
+        name="index"
+    ),
+    path(
+        "tasks/",
+        TaskListView.as_view(),
+        name="task-list"
+    ),
+    path(
+        "tasks/create/",
+        TaskCreateView.as_view(),
+        name="task-create"
+    ),
+    path(
+        "tasks/<int:pk>/detail/",
+        TaskDetailView.as_view(),
+        name="task-detail"
+    ),
+    path(
+        "tasks/<int:pk>/update/",
+        TaskUpdateView.as_view(),
+        name="task-update"
+    ),
+    path(
+        "tasks/<int:pk>/delete/",
+        TaskDeleteView.as_view(),
+        name="task-delete"
+    ),
+    path(
+        "task/<int:pk>/task_completed/",
+        TaskCompletedView.as_view(),
+        name="task-completed"
+    ),
+    path(
+        "task/<int:pk>/add_or_del_worker/",
+        TaskAddOrDelWorkerView.as_view(),
+        name="task-add-or-del-worker"
+    ),
+    path(
+        "worker/create/",
+        WorkerCreateView.as_view(),
+        name="worker-create"
+    ),
+    path(
+        "worker/<int:pk>/profile/",
+        WorkerDetailView.as_view(),
+        name="worker-detail"
+    ),
+    path(
+        "worker/<int:pk>/update/",
+        WorkerUpdateView.as_view(),
+        name="worker-update"
+    ),
+    path(
+        "worker/community/",
+        WorkerListView.as_view(),
+        name="worker-list"
+    ),
+    path(
+        "worker/<int:pk>/delete/",
+        WorkerDeleteView.as_view(),
+        name="worker-delete"
+    ),
+    path(
+        "change-password/",
+        password_change,
+        name="change-password"
+    ),
+    path(
+        "accounts/logout/",
+        CustomLogoutView.as_view(),
+        name="logout"
+    ),
+]
+
+app_name = "task_manager"
