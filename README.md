@@ -37,5 +37,5 @@ python manage.py runserver
 * An employee has partial access can create tasks, select tasks, and mark completed tasks.
 
 ## Demo
-![Dashboard Interface](demo_dashboard.png)
-![Login page](demo_login.png)
+![Dashboard Interface](demo/demo_dashboard.png)
+![Login page](demo/demo_login.png)
