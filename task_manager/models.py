@@ -24,11 +24,7 @@ class Worker(AbstractUser):
         ordering = ["username"]
 
     def __str__(self) -> str:
-        return (
-            f"{self.username} (Full name: "
-            f"{self.first_name} {self.last_name} "
-            f"Position: {self.position})"
-        )
+        return f"{self.username} ({self.first_name} {self.last_name})"
 
     def get_absolute_url(self) -> str:
         return reverse("task_manager:worker-detail", kwargs={"pk": self.pk})

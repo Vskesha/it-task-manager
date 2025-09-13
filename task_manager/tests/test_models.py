@@ -18,9 +18,7 @@ class ModelsTests(TestCase):
         )
         self.assertEqual(
             str(worker),
-            f"{worker.username} (Full name: "
-            f"{worker.first_name} {worker.last_name} "
-            f"Position: {worker.position})"
+            f"{worker.username} ({worker.first_name} {worker.last_name})"
         )
 
     def test_task_type_str(self):
