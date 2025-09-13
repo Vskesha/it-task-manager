@@ -2,8 +2,6 @@ from django.urls import path
 
 from task_manager.views import (
     CustomLogoutView,
-    index,
-    password_change,
     TaskAddOrDelWorkerView,
     TaskCompletedView,
     TaskCreateView,
@@ -16,6 +14,8 @@ from task_manager.views import (
     WorkerDetailView,
     WorkerListView,
     WorkerUpdateView,
+    index,
+    password_change,
 )
 
 urlpatterns = [
