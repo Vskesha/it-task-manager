@@ -140,10 +140,6 @@ class TaskAddOrDelWorkerView(LoginRequiredMixin, generic.View):
         return redirect("task_manager:task-list")
 
 
-def is_admin(user):
-    return user.is_superuser
-
-
 class WorkerCreateView(
     LoginRequiredMixin,
     UserPassesTestMixin,
@@ -153,7 +149,7 @@ class WorkerCreateView(
     form_class = WorkerCreateForm
 
     def test_func(self):
-        return is_admin(self.request.user)
+        return self.request.user.is_superuser
 
 
 class WorkerDeleteView(
@@ -165,7 +161,7 @@ class WorkerDeleteView(
     success_url = reverse_lazy("task_manager:worker-list")
 
     def test_func(self):
-        return is_admin(self.request.user)
+        return self.request.user.is_superuser
 
 
 class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
