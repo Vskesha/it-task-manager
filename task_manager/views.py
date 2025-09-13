@@ -21,7 +21,7 @@ from task_manager.models import Task, Worker
 
 @login_required
 def index(request) -> HttpResponse:
-    all_task = Task.objects.all()
+    all_task = Task.objects.all().prefetch_related("assignees")
 
     not_completed_task = all_task.filter(is_completed=False)
     num_not_completed_task = not_completed_task.count()
