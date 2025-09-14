@@ -82,7 +82,7 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy("task_manager:task-list")
 
 
-class TaskDetailView(generic.DetailView):
+class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
     queryset = (
         Task.objects.all()
@@ -217,7 +217,9 @@ def password_change(request) -> HttpResponse:
             messages.success(request, "Your password has been changed")
             return redirect("login")
         else:
-            for error in list(form.errors.values()):
-                messages.error(request, error)
-    form = ChangePasswordForm(user)
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, error)
+    else:
+        form = ChangePasswordForm(user)
     return render(request, "task_manager/change_password.html", {"form": form})
