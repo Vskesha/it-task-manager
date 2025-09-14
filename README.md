@@ -39,3 +39,6 @@ python manage.py runserver
 ## Demo
 ![Dashboard Interface](demo/demo_dashboard.png)
 ![Login page](demo/demo_login.png)
+
+## Tests
+Test coverage is here: [COVERAGE](https://it-task-manager-bttq.onrender.com/static/htmlcov/index.html)
