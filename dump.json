@@ -1,0 +1,252 @@
+[
+{
+    "model": "task_manager.position",
+    "pk": 1,
+    "fields": {
+        "name": "Developer"
+    }
+},
+{
+    "model": "task_manager.position",
+    "pk": 2,
+    "fields": {
+        "name": "Project Manager"
+    }
+},
+{
+    "model": "task_manager.position",
+    "pk": 3,
+    "fields": {
+        "name": "QA"
+    }
+},
+{
+    "model": "task_manager.position",
+    "pk": 4,
+    "fields": {
+        "name": "Designer"
+    }
+},
+{
+    "model": "task_manager.position",
+    "pk": 5,
+    "fields": {
+        "name": "DevOps"
+    }
+},
+{
+    "model": "task_manager.worker",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$5eZaQTnttbDsf8WnArdjD2$ELP0uTRc33iR1CHrRIryFGMKkQdLO5zHTdJl/JH5guo=",
+        "last_login": "2025-08-27T00:19:20.313Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@example.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-08-26T14:26:27.944Z",
+        "position": 2,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_manager.worker",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$TY3AdX2k7CAaHo1xB2mZh3$+2EUYc80YBJE+EAOq7sHldriStd3bDu+3cjvri5Qrdc=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "vskesha",
+        "first_name": "Vs",
+        "last_name": "Kesha",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-26T10:57:01.727Z",
+        "position": 1,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_manager.worker",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$OsHaR7Wc8e1nM91roaY2IC$jduLOydn7KpvKpIQe5sMI1Cj2zVdAb/rsqpfS3ZEuwY=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "qadev",
+        "first_name": "Qa",
+        "last_name": "Dev",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-26T11:04:43.671Z",
+        "position": 3,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_manager.tasktype",
+    "pk": 1,
+    "fields": {
+        "name": "Bug"
+    }
+},
+{
+    "model": "task_manager.tasktype",
+    "pk": 2,
+    "fields": {
+        "name": "New feature"
+    }
+},
+{
+    "model": "task_manager.tasktype",
+    "pk": 3,
+    "fields": {
+        "name": "Breaking change"
+    }
+},
+{
+    "model": "task_manager.tasktype",
+    "pk": 4,
+    "fields": {
+        "name": "Refactoring"
+    }
+},
+{
+    "model": "task_manager.tasktype",
+    "pk": 5,
+    "fields": {
+        "name": "QA"
+    }
+},
+{
+    "model": "task_manager.tasktype",
+    "pk": 6,
+    "fields": {
+        "name": "Research"
+    }
+},
+{
+    "model": "task_manager.tasktype",
+    "pk": 7,
+    "fields": {
+        "name": "Organizational"
+    }
+},
+{
+    "model": "task_manager.task",
+    "pk": 1,
+    "fields": {
+        "name": "Test Bug",
+        "description": "There is some critical bug in views",
+        "deadline": null,
+        "is_completed": false,
+        "priority": "Urgent",
+        "task_type": 1,
+        "assignees": [
+            2
+        ]
+    }
+},
+{
+    "model": "task_manager.task",
+    "pk": 2,
+    "fields": {
+        "name": "Fix errors on the website",
+        "description": "Sometimes some info text not appears on the index page",
+        "deadline": "2025-08-30T15:00:00Z",
+        "is_completed": false,
+        "priority": "Normal",
+        "task_type": 1,
+        "assignees": [
+            1
+        ]
+    }
+},
+{
+    "model": "task_manager.task",
+    "pk": 3,
+    "fields": {
+        "name": "Prepare presentation about the new product",
+        "description": "presentation",
+        "deadline": "2025-08-27T09:00:00Z",
+        "is_completed": false,
+        "priority": "Low",
+        "task_type": 3,
+        "assignees": [
+            1,
+            2
+        ]
+    }
+},
+{
+    "model": "task_manager.task",
+    "pk": 4,
+    "fields": {
+        "name": "fix images",
+        "description": "Images are not shown correctly on the page",
+        "deadline": "2025-08-27T15:00:00Z",
+        "is_completed": false,
+        "priority": "Urgent",
+        "task_type": 1,
+        "assignees": [
+            1,
+            3,
+            2
+        ]
+    }
+},
+{
+    "model": "task_manager.task",
+    "pk": 5,
+    "fields": {
+        "name": "Review competitor analysis report",
+        "description": "review",
+        "deadline": "2025-08-27T09:00:00Z",
+        "is_completed": true,
+        "priority": "Normal",
+        "task_type": 5,
+        "assignees": [
+            3
+        ]
+    }
+},
+{
+    "model": "task_manager.task",
+    "pk": 6,
+    "fields": {
+        "name": "Conduct market research",
+        "description": "research",
+        "deadline": null,
+        "is_completed": true,
+        "priority": "High",
+        "task_type": 6,
+        "assignees": [
+            1,
+            3
+        ]
+    }
+},
+{
+    "model": "task_manager.task",
+    "pk": 7,
+    "fields": {
+        "name": "Organize teambuilding event",
+        "description": "event description",
+        "deadline": "2025-08-30T09:00:00Z",
+        "is_completed": true,
+        "priority": "Normal",
+        "task_type": 7,
+        "assignees": [
+            1
+        ]
+    }
+}
+]
